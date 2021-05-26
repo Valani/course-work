@@ -1,41 +1,66 @@
--- Запросить все курсы
-SELECT * FROM Courses;
+1. SELECT * FROM Courses;
 
--- Запросить курсы, где уровень "Начальный", а рейтинг больше 5, и отсортировать по убыванию даты создания
-SELECT title, level, rating FROM Courses
+2. SELECT title, level, rating FROM Courses
 WHERE level LIKE 'Beginner' and rating > 5
 ORDER BY created DESC;
 
--- Запросить курсы, их рейтинг и текст комментариев с помощью
--- неявного соединения таблиц.
-SELECT Courses.title, Courses.rating, Comments.text FROM Courses, Comments
+3. SELECT Courses.title, Courses.rating, Comments.text FROM Courses, Comments
 WHERE Comments.course_id = Courses.id
 ORDER BY Courses.rating DESC;
 
--- Запросить курсы и предмет, к которому они относятся, используя внутренний Join
-SELECT Courses.title as 'Most popularity courses', S.title as 'Subject' FROM Courses
+4. SELECT Courses.title as 'Most popularity courses', S.title as 'Subject' FROM Courses
 JOIN Subjects as S on Courses.subject_id = S.id
 ORDER BY Courses.rating DESC
 LIMIT 10;
 
-SELECT Courses.* FROM Courses
+5. SELECT Courses.* FROM Courses
 WHERE Courses.title LIKE 'P%'
 ORDER BY Courses.created DESC;
 
-SELECT Courses.title, A.name, A.rating FROM Courses
+6. SELECT Courses.title, A.name, A.rating FROM Courses
 JOIN Authors as A on A.id = Courses.owner_id;
 
-SELECT Courses.title, A.name FROM Courses
+7. SELECT Courses.title, A.name FROM Courses
 JOIN Authors AS A on Courses.owner_id = A.id
 JOIN Comments AS C on Courses.id = C.course_id
 WHERE Courses.rating BETWEEN 2 and 6;
 
-SELECT Authors.name, C.title, C.rating FROM Authors
+8. SELECT Authors.name, C.title, C.rating FROM Authors
 JOIN Courses as C on Authors.id = C.owner_id
 ORDER BY C.rating ASC;
 
-SELECT count(*) as 'Count courses', min(Courses.rating), max(Courses.rating) FROM Courses
+9. SELECT count(*) as 'Count courses', min(Courses.rating), max(Courses.rating) FROM Courses
 
-SELECT Users.username, C.text, C.date_created FROM Users
+10. SELECT Users.username, C.text, C.date_created FROM Users
 JOIN Comments as C on Users.id = C.sender_id
 ORDER BY C.date_created
+
+11. SELECT * FROM Comments
+WHERE Comments.id % 2 = 0
+ORDER BY course_id;
+
+12. SELECT * FROM Users
+WHERE Users.mail LIKE '%@gmail.com'
+ORDER BY Users.reg_date DESC;
+
+13. SELECT * FROM Users
+WHERE length(Users.password) < 6
+ORDER BY length(Users.password);
+
+14. SELECT Courses.title, A.name FROm Courses
+JOIN Authors as A on A.id = Courses.owner_id
+WHERE Courses.level = 'Beginner';
+
+15. SELECT CourseContent.name_content, C.title FROM CourseContent
+JOIN Courses as C on C.id = CourseContent.course_id
+WHERE CourseContent.name_content LIKE '%book%';
+
+16. SELECT * FROM CourseContent
+WHERE content_type = 'picture' or content_type='file'
+
+17. SELECT `courses`.`title` AS `Name course`,  `users`.`username` AS `Name Student`
+FROM `courses` 
+	LEFT JOIN `coursesstudents` ON `coursesstudents`.`course_id` = `courses`.`id` 
+	LEFT JOIN `students` ON `coursesstudents`.`student_id` = `students`.`id` 
+	LEFT JOIN `users` ON `students`.`user_id` = `users`.`id`
+WHERE users.username IS NOT NULL;
