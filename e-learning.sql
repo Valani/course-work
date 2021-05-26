@@ -436,3 +436,20 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO coursesstudents(course_id, student_id) VALUES
+	(1,1),
+    (2,2),
+    (3,3),
+    (4,4),
+    (5,5),
+    (6,6),
+    (7,7),
+    (8,8),
+    (9,9),
+    (1,4),
+    (2,5),
+    (7,6),
+    (4,7),
+    (3,8),
+    (8,9),
+    (10,10);
