@@ -64,3 +64,9 @@ FROM `courses`
 	LEFT JOIN `students` ON `coursesstudents`.`student_id` = `students`.`id` 
 	LEFT JOIN `users` ON `students`.`user_id` = `users`.`id`
 WHERE users.username IS NOT NULL;
+
+18. SELECT title,description,rating FROM courses
+WHERE
+    rating = (SELECT MAX(rating) FROM courses);
+    
+19. 
